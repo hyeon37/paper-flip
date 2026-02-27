@@ -1,0 +1,91 @@
+:root {
+  --paper-width: 100%;
+  --paper-height: 100%;
+  --paper-clip-width: 3rem;
+  --paper-clip-height: 1rem;
+  --paper-flip-width: 10rem;
+  --paper-flip-height: 10rem;
+}
+
+.papers .paper,
+.papers .paper > * {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.papers .paper:not(.on) {
+  visibility: hidden;
+}
+
+.papers .paper:not(:last-child).on .front {
+  clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--paper-flip-height)),
+      calc(100% - var(--paper-flip-width)) 100%,
+      0 100%
+  );
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+
+.papers .paper:not(:last-child).on .back {
+  clip-path: polygon(
+      calc(
+          100% - var(--paper-flip-width) +
+          calc(var(--paper-flip-width) *
+          cos(calc(
+              2 * atan2(var(--paper-flip-height), var(--paper-flip-width))
+          )))
+      ) calc(
+          100% -
+          calc(var(--paper-flip-width) *
+          sin(calc(
+              2 * atan2(var(--paper-flip-height), var(--paper-flip-width))
+          )))
+      ),
+      100% calc(100% - var(--paper-flip-height)),
+      100% calc(100% - var(--paper-flip-height)),
+      calc(100% - var(--paper-flip-width)) 100%,
+      calc(100% - var(--paper-flip-width)) 100%
+  );
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+
+.papers .paper.on.flip .front {
+  clip-path: polygon(
+      0 0,
+      var(--paper-clip-width) 0,
+      var(--paper-clip-width) 0,
+      0 var(--paper-clip-height),
+      0 var(--paper-clip-height)
+  );
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+
+.papers .paper.on.flip .back {
+  clip-path: polygon(
+      calc(
+          var(--paper-clip-width) - calc(hypot(var(--paper-height), var(--paper-clip-width)) * cos(calc(2 * atan2(var(--paper-clip-width), var(--paper-clip-height))))))
+  ) calc(
+      0 - calc(hypot(var(--paper-height), var(--paper-clip-width)) * sin(calc(2 * atan2(calc(var(--paper-clip-width), var(--paper-clip-height)))
+      )))
+  ),
+  calc(
+      var(--paper-clip-width) - calc(calc(var(--paper-width) - var(--paper-clip-width)) * cos(calc(2 * atan2(var(--paper-clip-width), var(--paper-clip-height)))))
+  ) calc(
+      0 - calc(calc(var(--paper-width) - var(--paper-clip-width)) * sin(calc(2 * atan2(var(--paper-clip-width), var(--paper-clip-height)))))
+  ),
+  var(--paper-clip-width) 0,
+  0 var(--paper-clip-height),
+  calc(
+      0 - calc(calc(var(--paper-height) - var(--paper-clip-height)) * cos(2 * atan2(var(--paper-clip-width), var(--paper-clip-height))))
+  ) calc(
+      var(--paper-height) - calc(calc(var(--paper-height) - var(--paper-clip-height)) * sin(2 * atan2(var(--paper-clip-width), var(--paper-clip-height))))
+  );
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}

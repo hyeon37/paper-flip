@@ -1,0 +1,27 @@
+@import url("https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css");
+@import url("paper-flip.css?v=260227");
+
+html {
+    font-size: 1vmin;
+}
+
+.papers {
+    width: 500px;
+    height: 300px;
+    top: 250px;
+    left: 250px;
+    position: relative;
+    background: darkolivegreen;
+}
+
+.papers .paper .front {
+    background: burlywood;
+}
+
+.papers .paper .back {
+    background: darkkhaki;
+}
+
+.content-area {
+    font-size: 30rem;
+}
