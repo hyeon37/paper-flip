@@ -5,6 +5,8 @@ const settings = {
   paperFlipWidth: '10rem',
   paperFlipHeight: '5rem',
   unit: 'rem',
+  transitionDuration: '1s',
+  transitionTimingFunction: 'linear',
 };
 
 // 초기 화면 설정
